@@ -119,8 +119,5 @@ Runtime → Change Runtime Type → GPU
 
 ## 👤 Author
 
-**Your Name**
-- GitHub: [@vasista-dhavala]((https://github.com/vasista-dhavala))
-
----
-
+**Vasista Dhavala**  
+GitHub: [@vasista-dhavala](https://github.com/vasista-dhavala)
