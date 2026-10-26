@@ -1,123 +1,48 @@
-# 🖼️ AI vs Real Image Detection
+# AI vs Real Image Detector
 
-A deep learning project that detects whether an image is **AI-Generated** or **Real** using MobileNetV2 transfer learning.
+A web app that estimates whether an uploaded image is more likely to be a real photograph or AI-generated.
 
----
+## Try it online
 
-## 📌 Project Overview
+**[Open the live app →](https://ai-vs-real-image.streamlit.app/)**
 
-This project uses a pretrained **MobileNetV2** model fine-tuned on a custom dataset of real and AI-generated images. The model outputs a confidence score indicating whether an image is real or AI-generated.
+Upload a JPG, JPEG, PNG, BMP, or WEBP image, then select **Analyse image**.
 
----
+The app shows:
 
-## 📂 Project Structure
-```
-AI-vs-Real-Image-Detection/
-├── Traning.ipynb        # Model training pipeline
-├── Testing.ipynb        # Model testing and prediction
-├── .gitignore           # Ignores model and cache files
-└── README.md            # Project documentation
-```
+- Whether the image is likely a real photograph or AI-generated
+- A confidence percentage
+- Real-photo and AI-generated score breakdowns
+- Image details such as resolution, file size, format, and analysis time
 
----
+> Results are estimates, not proof of where an image came from. Compression, filters, screenshots, edits, and unfamiliar AI generators can affect predictions.
 
-## 🧠 Model Architecture
+## How it works
 
-- **Base Model:** MobileNetV2 (pretrained on ImageNet)
-- **Custom Layers:**
-  - GlobalAveragePooling2D
-  - Dense(128, relu)
-  - Dense(1, sigmoid)
-- **Input Size:** 224 x 224 x 3
-- **Output:** 0 = AI-Generated, 1 = Real
+The detector uses a MobileNetV2-based image-classification model.
 
----
+1. The uploaded image is converted to RGB.
+2. It is resized to 224 × 224 pixels.
+3. The model calculates how likely it is to be a real photograph.
+4. The result is displayed as either **Real photograph** or **AI-generated image**.
 
-## 📊 Training Details
+- Real-photo score above 50% → Real photograph
+- Real-photo score at or below 50% → AI-generated image
 
-| Parameter | Value |
-|---|---|
-| Optimizer | Adam |
-| Loss | Binary Crossentropy |
-| Epochs | 10 |
-| Batch Size | 32 |
-| Image Size | 224x224 |
+The confidence percentage shows how strongly the model leans toward its result. It does not guarantee that the result is correct.
 
----
+## Run locally
 
-## 🚀 How to Run
+### Requirements
 
-> No installation needed! Just open in Google Colab.
+- Python 3.10 or newer
+- `image_identifier_model.h5` in the project folder
 
-### Training
-1. Open `Traning.ipynb` in Google Colab
-2. Mount your Google Drive
-3. Set your dataset path:
-```python
-train_dir = "/content/drive/MyDrive/dataset_split/train"
-val_dir   = "/content/drive/MyDrive/dataset_split/val"
-```
-4. Run all cells
-5. Model saves to your Google Drive as `image_identifier_model.h5`
+### Installation
 
-### Testing
-1. Open `Testing.ipynb` in Google Colab
-2. Mount your Google Drive
-3. Load your saved model:
-```python
-model_path = "/content/drive/MyDrive/image_identifier_model.h5"
-```
-4. Run all cells
-5. Enter image path when prompted
-
----
-
-## 📦 Dataset Structure
-```
-dataset_split/
-├── train/
-│   ├── real/            # Real images
-│   └── ai/              # AI-generated images
-└── val/
-    ├── real/            # Real images
-    └── ai/              # AI-generated images
-```
-
----
-
-## 📈 Results
-
-| Metric | Value |
-|---|---|
-| Validation Accuracy | 97.55% |
-| Validation Loss | 0.0923 |
-
-> Update these values after training your model.
-
----
-
-## 📌 Notes
-
-- Model file (`.h5`) is stored on Google Drive and is **not included** in this repository
-- Dataset is **not included** — bring your own real vs AI-generated image dataset
-- All code runs on **Google Colab** — no local setup required
-- Recommended to use **GPU runtime** in Colab for faster training:
-```
-Runtime → Change Runtime Type → GPU
-```
-
----
-
-## 🔮 Future Plans
-
-- [ ] Deploy as a web app using Gradio
-- [ ] Host model on Hugging Face
-- [ ] Add support for batch image prediction
-- [ ] Improve accuracy with fine-tuning
-
----
-
-## 👤 Author
-
-**Vasista Dhavala**  
-GitHub: [@vasista-dhavala](https://github.com/vasista-dhavala)
+```bash
+git clone https://github.com/vasista-dhavala/AI-vs-Real-Image-Detection.git
+cd AI-vs-Real-Image-Detection
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
