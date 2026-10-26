@@ -40,9 +40,14 @@ The confidence percentage shows how strongly the model leans toward its result. 
 
 ### Installation
 
-```bash
 git clone https://github.com/vasista-dhavala/AI-vs-Real-Image-Detection.git
 cd AI-vs-Real-Image-Detection
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+
+###Limitations
+This project is an image-classification demo. Do not use it as the only basis for decisions about misinformation, identity, copyright, safety, or authenticity. For important cases, always verify the image source and context.
+
+Author
+Vasista Dhavala — @vasista-dhavala
